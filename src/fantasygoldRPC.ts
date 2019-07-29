@@ -24,7 +24,7 @@ export default class FantasyGoldRPC {
 export const rpcClient = new FantasyGoldRPC({
   user: "fantasygold",
   pass: "test",
-  port: "18332",
+  port: "58804",
   protocol: "http",
 })
 

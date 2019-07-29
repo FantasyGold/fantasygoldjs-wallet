@@ -1,5 +1,5 @@
 export enum NetworkNames {
-  MAINNET = "qtum",
-  TESTNET = "qtum_testnet",
-  REGTEST = "qtum_regtest",
+  MAINNET = "fantasygold",
+  TESTNET = "fantasygold_testnet",
+  REGTEST = "fantasygold_regtest",
 }

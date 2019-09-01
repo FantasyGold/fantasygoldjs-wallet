@@ -10,7 +10,7 @@ services:
     - ./data/:/data
     ports:
     - "3001:3001"
-    - "18332:18332"
+    - "57804:57804"
 
   mongo:
     image: mongo

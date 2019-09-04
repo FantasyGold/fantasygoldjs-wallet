@@ -10,6 +10,10 @@ This library makes it possible to run DApp without the users having to run a ful
 ## Install
 
 ```
+npm install 
+```
+or
+```
 yarn add fantasygoldjs-wallet
 ```
 

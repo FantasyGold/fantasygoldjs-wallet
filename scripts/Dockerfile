@@ -1,3 +1,3 @@
-FROM dcb9/fantasygold-insightapi
+FROM fantasygold/fantasygold
 
 COPY init-accounts.sh /usr/local/bin/

@@ -1,18 +1,15 @@
 # FantasyGoldJS Wallet
 
-This is a client-side wallet library that can generate private keys from a mnemonic, or import private keys from other FantasyGold wallets.
+This is a client-side wallet library that can generate private keys from a mnemonic, or import private keys from other FANTASYGOLD wallets.
 
-It can sign transactions locally, and submit the raw transaction data to a remote fantasygold node. The blockchain data is provided by the Insight API, rather than the raw fantasygoldd RPC calls.
+It can sign transactions locally, and submit the raw transaction data to a remote fantasygold node. The blockchain data is provided by the Insight API (which powers https://explorer.fantasygold.org/), rather than the raw fantasygoldd RPC calls.
 
 This library makes it possible to run DApp without the users having to run a full fantasygoldd node.
 
+> This library is extracted from the official [FANTASYGOLD web wallet](https://github.com/fantasygoldproject/fantasygold-web-wallet).
 
 ## Install
 
-```
-npm install 
-```
-or
 ```
 yarn add fantasygoldjs-wallet
 ```
@@ -45,10 +42,14 @@ npm run clean
 
 ## Implementation Notes
 
+There are some differences from the original web wallet repo.
+
+- Removed VUE specific code.
+- Removed reactive data setters that are intended to trigger view updates, to make this a plain-old JavaScript module.
 - Each wallet instance is instantiated with a network explicitly. This allows simultaneous use of different networks.
 - TypeScript for type hinting.
 - Uses satoshi (1e8) as internal units
-  - Can represent up to ~90 million FGC accurately.
+  - Can represent up to ~90 million FANTASYGOLD accurately.
 - Uses [coinselect](https://github.com/bitcoinjs/coinselect) to select utxos.
   - Taking into account the size of a transaction, and multiplies that by fee rate per byte.
   - Uses blackjack algorithm, and fallbacks to simple accumulative.
@@ -100,7 +101,7 @@ Example Output:
 
 ```
 mnemonic: hold struggle ready lonely august napkin enforce retire pipe where avoid drip
-public address: fLUHmrFGexxpyHwQphLpE1czZNFE5m1xmV
+public address: qLUHmrFGexxpyHwQphLpE1czZNFE5m1xmV
 private key (WIF): cNQKccYYQyGX9G9Qxq2DJev9jHygbZpb2UG7EvUapbtDx5XhkhYE
 ```
 
@@ -110,7 +111,7 @@ This example restores a wallet from a private key (in [WIF](https://en.bitcoin.i
 
 The transaction is signed locally, and the transaction submitted to a remote API.
 
-The currency unit used is `satoshi`. To convert FGC to satoshi you should multiply the amount you want with `1e8`.
+The currency unit used is `satoshi`. To convert fantasygold to satoshi you should multiply the amount you want with `1e8`.
 
 ```js
 import { networks } from "fantasygoldjs-wallet"
@@ -124,8 +125,8 @@ async function main() {
 
   console.log(wallet.address)
 
-  const toAddr = "fS3ThpDn4HRH9we2hZUdF3F3uR7TTvpZ9v"
-  // Sending 0.1 fgc
+  const toAddr = "qS3ThpDn4HRH9we2hZUdF3F3uR7TTvpZ9v"
+  // Sending 0.1 fantasygold
   const sendtx = await wallet.send(toAddr, 1, 0.1 * 1e8)
   console.log("sendtx", sendtx)
 }
@@ -151,7 +152,7 @@ contract Burn {
 }
 ```
 
-The ABI encoding for the `burnbabyburn()` invokation is `e179b912`. We'll burn 0.05 FGC, expressed in unit of satoshi.
+The ABI encoding for the `burnbabyburn()` invokation is `e179b912`. We'll burn 0.05 fantasygold, expressed in unit of satoshi.
 
 ```ts
 import { networks } from "fantasygoldjs-wallet"
@@ -167,7 +168,7 @@ async function main() {
   const encodedData = "e179b912" // burnbabyburn()
 
   const tx = await wallet.contractSend(contractAddress, encodedData, {
-    amount: 0.05 * 1e8, // 0.05 fgc in satoshi
+    amount: 0.05 * 1e8, // 0.05 fantasygold in satoshi
   })
 
   console.log(tx)
@@ -325,7 +326,7 @@ Example:
 
 ```ts
 const toAddress = "fZaTYNEimGLuqnBDpP3KvBKsFs3DbCuwnr"
-const amount = 0.15 * 1e8 // 0.15 FGC
+const amount = 0.15 * 1e8 // 0.15 FANTASYGOLD
 
 const tx = await wallet.send(toAddress, amount)
 console.log(tx)
@@ -353,7 +354,7 @@ Setting tx fee rate manually:
 
 ```ts
 const tx = await wallet.send(toAddress, amount, {
-  // rate is 400 satoshi per byte, or  ~0.004 fgc/KB, as is typical.
+  // rate is 400 satoshi per byte, or  ~0.004 fantasygold/KB, as is typical.
   feeRate: 400,
 })
 ```
@@ -363,7 +364,7 @@ const tx = await wallet.send(toAddress, amount, {
 Estimate the maximum value that could be sent from this wallet address.
 
 ```ts
-const maxSend = await wallet.sendEstimateMaxValue(toAddress)
+const maxSend = await wallet.sendEstimateMaxValue(wallet.address)
 ```
 
 ## async wallet.generateTx
@@ -684,7 +685,7 @@ console.log(info)
 Example output:
 
 ```ts
-wallet address: fbkJZTKQfcout2joWVmnvUrJUDTg93bhdv
+wallet address: qbkJZTKQfcout2joWVmnvUrJUDTg93bhdv
 
 {
   pagesTotal: 4,
@@ -693,11 +694,11 @@ wallet address: fbkJZTKQfcout2joWVmnvUrJUDTg93bhdv
       txid: 'f20914f3d810010c0a74df60abb3fcf0d3ff2669d944ce187f079ec9faec563e',
       version: 1,
       locktime: 0,
-      isqrc20Transfer: false,
+      isfgcc20Transfer: false,
       vin: [Array],
       vout: [Array],
       blockhash: 'b993b80423233c4371c316e8d2eec6e0ea191efeb518fa3289f8ebce5cec8ab1',
-      blockheight: 1721,
+      blockheight: 171321,
       confirmations: 2644,
       time: 1530852864,
       blocktime: 1530852864,

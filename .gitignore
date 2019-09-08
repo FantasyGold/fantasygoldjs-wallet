@@ -1,8 +1,6 @@
-lib
 node_modules
 *.tgz
-src/scripts
 notes
 data
 .cache
-contracts
+

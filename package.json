@@ -1,13 +1,12 @@
 {
   "name": "@fantasygold/fantasygoldjs-wallet",
-  "version": "0.2.3",
+  "version": "0.2.5",
   "description": "A toolkit for building fantasygold light wallets",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
   "scripts": {
     "start-services": "./scripts/start-services.sh",
     "build": "tsc -w",
-    "bundle": "webpack --config webpack.config.js",
     "clean": "docker-compose stop && docker-compose rm -f && rm -rf ./data && rm -rf lib",
     "test": "tsc && mocha lib/**/*.test.js",
     "test-watch": "tsc -w & mocha -w lib/**/*.test.js"
@@ -23,30 +22,33 @@
     "@types/bitcoinjs-lib": "^3.3.1",
     "@types/chai": "^4.1.2",
     "@types/mocha": "^2.2.48",
-    "@types/node": "^8.9.1",
+    "@types/node": "^14.14.7",
     "chai": "^4.1.2",
     "mocha": "^5.2.0",
-    "ts-loader": "^4.3.1",
-    "tslint": "^5.11.0",
-    "typescript": "^3.0.1",
+    "ts-node-dev": "^1.0.0",
+    "tslint": "^6.1.3",
+    "typescript": "^4.0.5",
+    
     "webpack": "^4.16.5",
     "webpack-cli": "^3.1.0"
   },
   "dependencies": {
     "@types/bip38": "^2.0.0",
     "@types/secp256k1": "^3.5.0",
-    "axios": "^0.19.0",
+    "axios": "^0.20.0",
     "bignumber.js": "4.1.0",
     "bip38": "^2.0.2",
     "bip39": "^2.5.0",
+    "bs58check": "^2.1.2",
     "buffer": "^5.1.0",
     "coinselect": "^3.1.11",
+    "elliptic": "^6.5.3",
     "hash.js": "^1.1.5",
-    "@fantasygold/fantasygoldd-rpc": "^0.0.4",
-    "@fantasygold/fantasygoldjs-lib": "^0.0.8",
+    "fantasygoldd-rpc": "git://github.com/fantasygold/fantasygoldd-rpc.git#master",
+    "fantasygoldjs-lib": "git://github.com/fantasygold/fantasygoldjs-lib.git#master",
     "safe-buffer": "^5.1.1",
     "scryptsy": "^2.0.0",
-    "secp256k1": "^3.5.0",
+    "secp256k1": "^4.0.2",
     "varuint-bitcoin": "^1.1.0"
   }
 }
